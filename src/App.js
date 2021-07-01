@@ -6,18 +6,31 @@ const Card = ({children}) => {
   const cardContainerStyle = {
     height: '100vh',
     width: '100%',
-    backgroundColor:'black',
+    
+background: 'linear-gradient(90deg, rgba(171,161,24,1) 0%, rgba(211,26,26,1) 50%, rgba(171,161,24,1) 100%)',
+backgroundImage: 'url("./notesbg.png")',
+backgroundRepeat: 'no-repeat',
+backgroundPosition: 'center',
+backgroundSize: 'cover',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
   }
+  
   const cardStyle = {
      display: 'grid',
-     width: '325px',
-     height: '80vh',
+     width: '300px',
+     height: '600px',
      backgroundColor: 'gray',
     gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
+    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    
+    backgroundColor: 'white',
+    border: '4px solid black',
+    boxShadow: '10px 10px 0px 0px black ',
+    padding: '1rem',
+
   }
   return <>
   <div style={cardContainerStyle}>
@@ -31,43 +44,86 @@ const Card = ({children}) => {
 
 const App = ()=>  {
   const selectedButtonStyle = {
-    backgroundColor: 'green',
+   
+    backgroundColor: 'white',
     color: 'black',
-    border: '1px solid black',
-    fontSize: '1.5rem'
+    border: '3px solid black',
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    margin: '0.5rem',
+    borderRadius: '0.5rem',
+    boxShadow: '4px 4px 0px 0px black',
+
   }
   const unselectedButtonStyle = {
-    backgroundColor: 'gray',
+    backgroundColor: '#eee',
     color: 'black',
-    border: '1px solid black',
-    fontSize: '1.5rem'
+    border: '3px  solid black',
+    boxShadow: '1px 1px 0px 0px black',
+    fontSize: '1.5rem',
+    margin: '0.5rem',
+    borderRadius: '0.5rem',
+    position: 'relative',
+    bottom: '-2px',
+    right: '-2px',
+    fontWeight: 'bold',
+
   } 
   const runButtonStyle = {
-    backgroundColor: '#333',
-    color: 'wheat',
+    backgroundColor: 'white',
+    color: 'black',
+    border: '3px solid black',
+    borderRadius: '1rem',
+    boxShadow: '6px 6px 0px 0px black ',
     fontSize: '1.5rem',
     gridRow: '7/8',
-    gridColumn: '1/4'
+    gridColumn: '1/4',
+    position: 'relative',
+    bottom: '2px',
+    right: '2px',
+    fontWeight: 'bold',
+  }
+  const hoverRunStyle = {
+    backgroundColor: '#ddd',
+    color: 'black',
+    border: '3px solid black',
+    borderRadius: '1rem',
+    boxShadow: '2px 2px 0px 0px black ',
+    fontSize: '1.5rem',
+    gridRow: '7/8',
+    gridColumn: '1/4',
+    position: 'relative',
+    bottom: '-1px',
+    right: '-1px'
   }
   const answerStyle = {
-    backgroundColor: 'blue',
-    color: 'wheat',
+    
+    color: 'black',
     gridRow: '2/3',
     gridColumn: '1/4',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'Center',
-    fontSize: '2rem'
+    fontSize: '2rem',
+  
+   
+    marginTop: '.5rem',
+    fontWeight: 'bold'
   }
   const titleStyle = {
-    color: 'white',
-    backgroundColor: 'black',
+    color: '#eee',
+    backgroundColor: '#111',
+    boxShadow: '4px 4px 10px 0px #777',
     gridRow: '1/2',
     gridColumn: '1/4',
     height: '100%',
     padding: '0',
     margin: '0',
-    textAlign: 'center'
+    textAlign: 'center',
+    border: '3px solid black',
+    borderRadius: '.25rem',
+    
+   
   }
   const [selectedNote, setSelectedNote] = useState('')
   const [ a, toggleA ] = useState(true)
@@ -99,10 +155,11 @@ const App = ()=>  {
     gS && noteArray.push('G#')
     const randomIndex = Math.round(Math.random() * (noteArray.length - 1));
     setSelectedNote(noteArray[randomIndex])
-    
-   
-
   }
+
+  const [isShown, setIsShown] = useState(false);
+
+
   return (
     <>
     <Card>
@@ -122,7 +179,7 @@ const App = ()=>  {
       <button onClick={()=>{toggleFS(!fS)}} style={fS ? selectedButtonStyle : unselectedButtonStyle} id='9'>F#</button>
       <button onClick={()=>{toggleG(!g)}} style={g ? selectedButtonStyle : unselectedButtonStyle} id='10'>G</button>
       <button onClick={()=>{toggleGS(!gS)}} style={gS ? selectedButtonStyle : unselectedButtonStyle} id='11'>G#</button>
-      <button onClick={()=>getRandomNote()} style={runButtonStyle}>Get Note</button>
+      <button onClick={()=>getRandomNote()} style={isShown ? hoverRunStyle : runButtonStyle} onMouseEnter={()=>setIsShown(true)}onMouseLeave={()=>setIsShown(false)}>Get Note</button>
       
     </Card>
     </>
