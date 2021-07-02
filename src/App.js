@@ -15,13 +15,14 @@ backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflow: 'hidden'
   }
   
   const cardStyle = {
      display: 'grid',
      width: '300px',
-     height: '600px',
+     maxHeight: '460px',
      backgroundColor: 'gray',
     gridTemplateColumns: '1fr 1fr 1fr',
     gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
@@ -32,6 +33,7 @@ backgroundSize: 'cover',
     padding: '1rem',
 
   }
+
   return <>
   <div style={cardContainerStyle}>
      <div style={cardStyle}>
